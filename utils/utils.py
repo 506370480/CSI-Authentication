@@ -13,7 +13,7 @@ def encode_onehot(labels, n_classes):     #labels：整数编码
     #行不变，变化列
     return onehot
 
-
+# 用于记录和保存训练过程中的信息到CSV文件。
 class CSVLogger():
     def __init__(self, args, filename='log.csv', fieldnames=['epoch']):
 
@@ -38,7 +38,7 @@ class CSVLogger():
     def close(self):
         self.csv_file.close()
 
-
+# 实现了Cutout数据增强技术，即在图像中随机遮盖一部分区域。
 class Cutout(object):
     """Randomly mask out one or more patches from an image.
        https://arxiv.org/abs/1708.04552

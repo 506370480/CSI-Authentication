@@ -3,11 +3,16 @@ from models.vgg import VGG
 import torch.nn.functional as F
 from torch.autograd import Variable
 import torch
+# Out-Of-Distribution Metrics。这是一组用于评估模型在处理与训练数据分布不同的数据时的性能的指标
+# 主要用于评估和分析一个基于卷积神经网络（CNN）的分类模型的性能
 
-
+#计算在真正例率（True Positive Rate, TPR）为95%时的假正例率（False Positive Rate, FPR）
 def tpr95(ind_confidences, ood_confidences):
     #calculate the false positive error when tpr is 95%
+
+    # ood_confidences: 指示类外（out-of-distribution, OOD）样本的置信度。
     Y1 = ood_confidences
+    # ind_confidences: 指示类内（in-distribution, IND）样本的置信度。
     X1 = ind_confidences
 
     start = np.min([np.min(X1), np.min(Y1)])
@@ -28,6 +33,8 @@ def tpr95(ind_confidences, ood_confidences):
     return fprBase
 
 
+# 计算最小检测错误率。
+# n_iter: 遍历的阈值数量。
 def detection(ind_confidences, ood_confidences, n_iter=10000, return_data=True):
     # calculate the minimum detection error
     Y1 = ood_confidences
@@ -66,7 +73,8 @@ def detection(ind_confidences, ood_confidences, n_iter=10000, return_data=True):
     
     
     
-    
+# 计算不同阈值下的假接受率（False Acceptance Rate, FAR）。
+# 遍历阈值，计算每个阈值下的FAR。
 def far_threshhold(ind_confidences, ood_confidences):
     #calculate the falsepositive error
     Y1 = ood_confidences
@@ -83,7 +91,7 @@ def far_threshhold(ind_confidences, ood_confidences):
     return all_delta, all_far
 
 
-
+# 计算不同阈值下的漏检率（Miss Detection Rate, MDR）。
 def md_threshhold(ind_confidences, ood_confidences):
     #calculate the miss detection rate
     Y1 = ood_confidences
@@ -99,7 +107,8 @@ def md_threshhold(ind_confidences, ood_confidences):
         all_md.append(md)
     return all_delta, all_md
 
-
+# 绘制接收者操作特征曲线（Receiver Operating Characteristic, ROC）
+#遍历阈值，计算FAR和MDR，用于绘制ROC曲线。
 def roc(ind_confidences, ood_confidences):
     #plot roc
     Y1 = ood_confidences
@@ -118,6 +127,9 @@ def roc(ind_confidences, ood_confidences):
         all_md.append(md)
     return all_delta, all_far, all_md
 
+# 计算模型在给定数据加载器上的准确率和置信度统计。
+# loader: 数据加载器，提供数据批次。
+# cnn: CNN模型。
 def acc(loader, cnn):
     correct = []
     probability = []
@@ -151,6 +163,7 @@ def acc(loader, cnn):
 
 
 
+# 使用CNN模型对数据加载器中的数据进行预测。
 
 def predict(loader, cnn):
     pred_all = []

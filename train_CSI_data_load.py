@@ -8,6 +8,7 @@ import numpy as np
 from PIL import Image
 from torch.utils.data import Dataset
 #import scipy.io
+# 通过应用不同的数据转换和随机排列增加了数据的多样性，这有助于提高模型的泛化能力
 import h5py
 #定义CSIDataLoad类，继承Dataset方法，并重写__getitem__()和__len__()方法
 # =============================================================================
@@ -122,20 +123,3 @@ class TrainCSIDataLoad(Dataset):
     def __len__(self):
         #return len(self.data)
         return np.size((self.data),3)
-        
-        
-         
-        
-        
-        
-        
-
-
-
-
-
-
-
-
-
-        

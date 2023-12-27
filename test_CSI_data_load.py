@@ -15,6 +15,7 @@ class TestCSIDataLoad(Dataset):
     def __init__(self, data_CSI, data_label,transform):
         self.data = data_CSI
         self.label = data_label
+        # transform 是一个函数或者操作，用于转换数据
         self.transform = transform
     # index是根据batchsize划分数据后得到的索引，最后将data和对应的labels进行一起返回
     def __getitem__(self, index):
@@ -44,20 +45,3 @@ class TestCSIDataLoad(Dataset):
 # #print(np.size(CSIData,3))
 # torch_data = CSIDataLoad(CSIData, CSILable)
 # =============================================================================
-        
-        
-        
-        
-        
-        
-        
-
-
-
-
-
-
-
-
-
-        

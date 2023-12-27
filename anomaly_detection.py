@@ -295,23 +295,3 @@ plt.ylabel('True label',fontproperties = 'Times New Roman', fontsize=10)
 heatmap = plt.savefig('confusion matrix.png',dpi=800, edgecolor='r',transparent=False, bbox_inches=None)
 heatmap = plt.savefig('confusion matrix.eps',dpi=800, edgecolor='r',transparent=False, bbox_inches=None)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
